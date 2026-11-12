@@ -1,0 +1,672 @@
+/*  تخزين الالوان في متغيرات
+   السبب: توحيد الألوان في كل الصفحات، وتسهيل تعديلها
+   من مكان واحد. الألوان مستخرجة من شعار الموقع. */
+:root{
+  --blue: #0B5ED7;
+  --orange: #FF8A3D; 
+  --purple: #8B5CF6; 
+  --turquoise: #14B8A6; 
+  --bglight: #F1F5FB; 
+  --text: #000000;  
+  --white: #FFFFFF;  
+
+  /* الظلال */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.10);
+  --transition: all 0.3s ease;
+}
+
+/* الوضع الليلي لتغير الالوان تلقائيا */
+body.dark-mode{
+  --bglight: #0F172A;
+  --text:    #FFFFFF;
+  --white:   #1E293B;
+}
+
+
+
+/* تنسيقات العامة */
+*{
+  box-sizing: border-box;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+body{
+  font-family: 'Cairo', sans-serif;
+  color: var(--text);
+  background-color: var(--white);
+  line-height: 1.7;
+  direction: rtl;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a{
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+img{
+  max-width: 100%;
+  height: auto;
+  transition: transform 0.4s ease;
+}
+
+hr{
+  opacity: 0.15;
+}
+
+
+
+/* تنسيقات لعناوين الاقسام */
+.section-title{
+  font-weight: 800;
+  color: var(--text);
+  position: relative;
+  display: inline-block;
+  padding-bottom: 12px;
+}
+
+.section-title::after{
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+  transform: translateX(50%);
+  width: 70px;
+  height: 4px;
+  background: linear-gradient(to left, var(--blue), var(--orange));
+  border-radius: 4px;
+}
+
+
+
+/* ---------------تنسيقات لل Header Section ---------*/
+.navbar{
+  transition: var(--transition);
+  padding: 10px 0;
+}
+
+.navbar-brand img{
+  transition: var(--transition);
+}
+
+.navbar .nav-link{
+  font-weight: 600;
+  color: var(--text) !important;
+  margin: 0 8px;
+  position: relative;
+  padding: 8px 4px !important;
+}
+
+
+.navbar .nav-link::after{     /* خط سفلي يظهر عند hover أو الصفحة النشطة */
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--orange);
+  transition: width 0.3s ease;
+}
+
+.navbar .nav-link:hover::after,
+.navbar .nav-link.active::after{
+  width: 100%;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active{
+  color: var(--blue) !important;
+}
+
+
+/* --------------تنسيقات لل Hero Section -----------------*/
+.hero-section{
+  min-height: 85vh;
+  background-image: linear-gradient(rgba(11, 94, 215, 0.75), rgba(0, 0, 0, 0.65)), url('../img/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+/* لتجنب مشاكل responsive على mobile*/
+@media (max-width: 768px){
+  .hero-section{
+    background-attachment: scroll;
+    min-height: 70vh;
+  }
+}
+
+.hero-section h1{
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.hero-section p{
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* زر (استعراض الفعاليات) */
+.btn-accent{
+  background-color: var(--orange);
+  color: var(--white);
+  font-weight: 700;
+  border: none;
+  border-radius: 40px;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(255, 138, 61, 0.4);
+}
+
+.btn-accent:hover{
+  background-color: #e5771f;
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 138, 61, 0.6);
+}
+
+
+/* رأس الصفحات يُستخدم في: events.html, event.html, about.html, contact.html. */
+.page-header{
+  background: linear-gradient(135deg, #0B5ED7 0%, #083a8a 100%);
+  padding: 60px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-header::before{
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 400px;
+  height: 400px;
+  background: rgba(255, 138, 61, 0.15);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.page-header .container{
+  position: relative;
+  z-index: 1;
+}
+
+.page-header h1{
+  font-weight: 800;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.page-header p{
+  opacity: 0.95;
+}
+
+
+/* تنسيقات لعرض البطاقات افقيا */
+.featuredSwiper{
+  padding: 20px 10px 60px;
+}
+
+.featured-card{
+  border-radius: 16px;
+  overflow: hidden;
+  transition: var(--transition);
+  background-color: var(--white);
+}
+
+.featured-card:hover{
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+.featured-card img{
+  height: 220px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.featured-card .card-title{
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* توحيد ألوان الـ Badges مع ألوان التصنيفات */
+.badge.bg-primary{ 
+  background-color: var(--blue) !important; 
+}
+
+.badge.bg-success{ 
+  background-color: var(--turquoise) !important; 
+}
+
+.badge.bg-purple{  
+  background-color: var(--purple) !important; 
+}
+
+.badge.bg-info{    
+  background-color: var(--blue) !important; 
+}
+
+.badge.bg-warning{ 
+  background-color: var(--orange) !important; 
+}
+
+.badge.bg-danger{  
+  background-color: var(--orange) !important; 
+}
+
+/* أزرار Swiper */
+.swiper-button-next,
+.swiper-button-prev{
+  color: var(--blue);
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.swiper-pagination-bullet-active{
+  background-color: var(--blue);
+}
+
+
+/* أزرار التصنيفات */
+.category-btn{
+  padding: 10px 24px;
+  border-radius: 40px;
+  font-weight: 600;
+  border-width: 2px;
+  transition: var(--transition);
+}
+
+.category-btn:hover{
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-outline-primary{ 
+  color: var(--blue); border-color: var(--blue); 
+}
+
+.btn-outline-primary:hover{ 
+  -color: var(--blue); color: var(--white); 
+}
+
+.btn-outline-success{ 
+  color: var(--turquoise); 
+  border-color: var(--turquoise); 
+}
+
+.btn-outline-success:hover{ 
+  background-color: var(--turquoise); 
+  color: var(--white);
+ }
+
+.btn-outline-purple{ 
+  color: var(--purple); 
+  border-color: var(--purple); 
+}
+
+.btn-outline-purple:hover{ 
+  background-color: var(--purple); 
+  color: var(--white); 
+}
+
+.btn-outline-info{ 
+  color: var(--blue); 
+  border-color: var(--blue); 
+}
+
+.btn-outline-info:hover{ 
+  background-color: var(--blue); 
+  color: var(--white); 
+}
+
+.btn-outline-warning{ 
+  color: var(--orange); 
+  border-color: var(--orange); 
+}
+
+.btn-outline-warning:hover{ 
+  background-color: var(--orange); 
+  color: var(--white); 
+}
+
+.btn-outline-danger{ 
+  color: var(--orange); 
+  border-color: var(--orange);
+}
+
+.btn-outline-danger:hover{ 
+  background-color: var(--orange); 
+  color: var(--white); 
+}
+
+
+/*  تنسيقات بطاقات الفعاليات */
+.event-card{
+  border-radius: 16px;
+  overflow: hidden;
+  transition: var(--transition);
+  background-color: var(--white);
+}
+
+.event-card:hover{
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-md);
+}
+
+.event-card img{
+  height: 200px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.event-card .card-title{
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* الأزرار الأساسية */
+.btn-primary{
+  background-color: var(--blue);
+  border-color: var(--blue);
+  font-weight: 600;
+  border-radius: 30px;
+  padding: 6px 18px;
+}
+
+.btn-primary:hover{
+  background-color: #094aad;
+  border-color: #094aad;
+}
+
+
+/*  معرض صور في صفحة تفاصيل الفعالية */
+.event-gallery .gallery-thumb{
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: var(--transition);
+}
+
+.event-gallery .gallery-thumb:hover{
+  border-color: var(--blue);
+  transform: scale(1.03);
+}
+
+
+/* بطاقات فريق العمل (Team Section) */
+.team-card{
+  background-color: var(--white);
+  transition: var(--transition);
+  border-radius: 12px;
+}
+
+.team-card:hover{
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--blue) !important;
+}
+
+.team-card h5{
+  color: var(--blue);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.team-card p{
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+
+/* -------------- Footer --------- */
+.footer{
+  background-color: #0B1B33;
+  color: #E2E8F0;
+}
+
+.footer-link{
+  color: #E2E8F0;
+  display: block;
+  padding: 4px 0;
+  transition: var(--transition);
+}
+
+.footer-link:hover{
+  color: var(--orange);
+  padding-right: 6px;
+}
+
+.footer .social-icons a{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: var(--transition);
+}
+
+.footer .social-icons a:hover{
+  background-color: var(--orange);
+  transform: translateY(-3px);
+}
+
+
+/* زر العودة للأعلى */
+.scroll-top{
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: none;
+  z-index: 999;
+  box-shadow: var(--shadow-md);
+}
+
+.scroll-top.show{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* زر تبديل الوضع الليلي */
+#themeToggle{
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--blue);
+  color: var(--white);
+  z-index: 999;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+#themeToggle:hover{
+  background-color: var(--orange);
+  transform: rotate(20deg);
+}
+
+
+/*  أزرار السوشيال في صفحة اتصل بنا */
+.social-btn{
+  width: 45px;
+  height: 45px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.social-btn:hover{
+  background-color: var(--orange) !important;
+  transform: translateY(-3px);
+}
+
+
+/* تجميع كل التجاوزات للوضع الليلي */
+
+/* Navbar */
+body.dark-mode .navbar,
+body.dark-mode .navbar.bg-white{
+  background-color: #1E293B !important;
+  border-bottom: 1px solid #334155;
+}
+
+body.dark-mode .navbar .nav-link{
+  color: #FFFFFF !important;
+}
+
+body.dark-mode .navbar .nav-link.active{
+  color: var(--orange) !important;
+}
+
+body.dark-mode .navbar-toggler{
+  border-color: #475569;
+}
+
+body.dark-mode .navbar-toggler-icon{
+  filter: invert(1);
+}
+
+body.dark-mode .bg-light{
+  background-color: #0F172A !important;
+}
+
+/* البطاقات */
+body.dark-mode .card,
+body.dark-mode .event-card,
+body.dark-mode .featured-card,
+body.dark-mode .team-card{
+  background-color: #1E293B !important;
+  color: #FFFFFF;
+  border-color: #334155 !important;
+}
+
+body.dark-mode .card .card-title,
+body.dark-mode .card h5,
+body.dark-mode .team-card h5{
+  color: #FFFFFF !important;
+}
+
+body.dark-mode .card .text-muted,
+body.dark-mode .team-card p,
+body.dark-mode .text-muted{
+  color: #CBD5E1 !important;
+}
+
+/* العناوين */
+body.dark-mode .section-title,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5{
+  color: #FFFFFF !important;
+}
+
+body.dark-mode p,
+body.dark-mode .lead{
+  color: #E2E8F0;
+}
+
+/* الأزرار والتصنيفات */
+body.dark-mode .category-btn{
+  background-color: transparent;
+}
+
+/* Footer */
+body.dark-mode .footer{
+  background-color: #020617;
+}
+
+/* زر العودة للأعلى */
+body.dark-mode .scroll-top{
+  background-color: var(--orange);
+}
+
+/* معرض الصور */
+body.dark-mode .event-gallery .gallery-thumb{
+  border-color: #334155;
+}
+
+body.dark-mode .event-gallery .gallery-thumb:hover{
+  border-color: var(--orange);
+}
+
+/* حقول النماذج */
+body.dark-mode .form-control{
+  background-color: #0F172A;
+  border-color: #334155;
+  color: #FFFFFF;
+}
+
+body.dark-mode .form-control::placeholder{
+  color: #94A3B8;
+}
+
+body.dark-mode .form-control:focus{
+  background-color: #0F172A;
+  color: #FFFFFF;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 0.25rem rgba(11, 94, 215, 0.25);
+}
+
+body.dark-mode .form-label{
+  color: #FFFFFF;
+}
+
+
+/* Responsive*/
+
+/* Tablet */
+@media (max-width: 992px){
+  .hero-section h1{ font-size: 2.2rem; }
+  .section-title{ font-size: 1.6rem; }
+}
+
+/* Mobile  */
+@media (max-width: 576px){
+  .hero-section{ min-height: 60vh; }
+  .hero-section h1{ font-size: 1.7rem; }
+  .hero-section p{ font-size: 0.95rem; }
+  .section-title{ font-size: 1.3rem; }
+  .category-btn{ padding: 8px 16px; font-size: 0.9rem; }
+
+  .featured-card img,
+  .event-card img{ height: 180px; }
+
+  #themeToggle,
+  .scroll-top{
+    width: 42px;
+    height: 42px;
+    bottom: 15px;
+  }
+}
+
